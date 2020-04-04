@@ -1,7 +1,8 @@
 # cordova-study
-# 🔷 Cordova &  Phone Gap Setup
+# Cordova &  Ph
+one Gap Setup
 
-### 🔵 W**hat is cordova?**
+### **What is cordova?**
 
 [https://cordova.apache.org/docs/en/3.0.0/guide/overview/index.html](https://cordova.apache.org/docs/en/3.0.0/guide/overview/index.html) 
 
