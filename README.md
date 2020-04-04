@@ -8,7 +8,7 @@
 - 그냥 한마디로 말하면 웹을 앱이랑 wrapping 시켜서 개발하게 함
 - javascript를 swift & Objective c 또는 Java & Kotlin이랑 mapping
 
-##  W**hat is phone gap?**
+##  **What is phone gap?**
 
 - [https://phonegap.com/](https://phonegap.com/)
 - From the team behind Apache Cordova, the Adobe PhoneGap framework is an open source distribution of Cordova
@@ -117,12 +117,12 @@ android 설치
     * Try:
     Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
 
-- 1차시도 - 안됨
+### 1차시도 - 안됨
 
     cordova platform rm android 
     cordova platform add android@nightly
 
-- 2차시도 - 안됨
+### 2차시도 - 안됨
 
 /platforms/android/CordovaLib/build/intermediates/library_manifest/debug/AndroidManifest.xml 로 가서 
 
@@ -154,7 +154,7 @@ android 설치
     
     </manifest>
 
-- 3차시도  - **😁 Success!**
+### 3차시도  - **😁 Success!**
 
         <?xml version='1.0' encoding='utf-8'?>
         <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
@@ -278,7 +278,7 @@ avd machine이 실행이 안된다면, 아래 코드를 .bash_profile에 추가
 
 적어도 `x86` 으로 돌아가는 avd machine을 하나를 설치한다
 
-### 🔵 Phone gap vs Cordova
+### Phone gap vs Cordova
 
 - Phone gap
     - Phonegap is owned by Adobe
@@ -288,3 +288,45 @@ avd machine이 실행이 안된다면, 아래 코드를 .bash_profile에 추가
     - It's not the service, or the support. It is `an app` itself
 
 Generally `Phone gap App` is `Cordova` App
+
+
+
+# Directory 구조
+
+##  config.xml
+
+- plugin 설정, android의 manifest, ios의 info.plist 같은 느낌
+- 이미지 루트등 asset 파일을 설정해주는 부분이기도 함
+
+❗️필요한 plugin 만 enable 하자
+
+##  Security
+
+config.xml 에서 설정해줌
+
+    <access origin="*" /> <!-- <access origin="https://myserver"> 식으로 바꿔줌 -->
+    <access origin="https://myapiserver.com"/>
+
+## Hooks - Script.
+
+- Give more information about the app
+
+## Platforms
+
+- serving 하고 있는 platform 들을 보여줌
+
+## Plugins
+
+- Dependency
+
+## WWW
+
+- 이 디렉토리에서 개발함.
+- res ⇒ image assets
+
+# Component Source
+
+- Don't reinvent the wheel!
+
+- [http://goratchet.com/](http://goratchet.com/)
+- [https://chocolatechip-ui.github.io/](https://chocolatechip-ui.github.io/)

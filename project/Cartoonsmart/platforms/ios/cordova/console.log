@@ -1,0 +1,13 @@
+2015-06-08 15:37:08.050 Cartoonsmart[59405:3228725] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/lawrenceturton/Library/Developer/CoreSimulator/Devices/1A97449F-556C-453F-A1CA-226B4A24B4BF/data/Containers/Data/Application/B83CCDD6-B25D-49D4-951E-BFDE396970A8/Library/Cookies/Cookies.binarycookies
+2015-06-08 15:37:08.475 Cartoonsmart[59405:3228725] Apache Cordova native platform version 3.8.0 is starting.
+2015-06-08 15:37:08.475 Cartoonsmart[59405:3228725] Multi-tasking -> Device: YES, App: YES
+2015-06-08 15:37:08.537 Cartoonsmart[59405:3228725] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-06-08 15:37:09.841 Cartoonsmart[59405:3228725] Resetting plugins due to page load.
+2015-06-08 15:37:10.886 Cartoonsmart[59405:3228725] Finished load of: file:///Users/lawrenceturton/Library/Developer/CoreSimulator/Devices/1A97449F-556C-453F-A1CA-226B4A24B4BF/data/Containers/Bundle/Application/73D5F671-DB59-4E17-9ACB-5A4B5D2BADA9/Cartoonsmart.app/www/index.html
