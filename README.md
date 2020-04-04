@@ -1,6 +1,8 @@
 # cordova-study
-# Cordova &  Ph
-one Gap Setup
+
+https://www.notion.so/Phonegap-Ludei-Build-HTML5-CSS-JS-Apps-dccbdd492ba842dcba245df0cfe2e7dc
+
+# Cordova &  Phonegap Setup
 
 ### **What is cordova?**
 
@@ -71,7 +73,7 @@ cordova 명령어
 
 `phonegap platform add browser && phonegap platform add browser` 를 실행 
 
-##  iOS 설치
+#  iOS 설치
 
 ios 설치 - 문제 없이 아주 잘됨 
 
@@ -81,9 +83,9 @@ ios 설치 - 문제 없이 아주 잘됨
     sudo npm install -g ios-sim
     ios-sim showdevicetypes  #해당 directory로 가ㅓㅅ.
 
-## Android 설치
+# Android 설치
 
-##  Error - Android 설치, cordova build error
+##  ❗️ Error - Android 설치, cordova build error
 
 android 설치 
 
@@ -331,3 +333,105 @@ config.xml 에서 설정해줌
 
 - [http://goratchet.com/](http://goratchet.com/)
 - [https://chocolatechip-ui.github.io/](https://chocolatechip-ui.github.io/)
+
+
+# 개발 Tool
+
+- compile 없이 확인하는 방법
+- `chrome://inspect/` 로 들어가면 현재 돌아가는 device들을 확인할 수 있음.
+- 웹개발의 development tool처럼 개발 가능
+
+#  Basic Code
+
+- mobile 환경을 고려해서 hover, focus, active 등의 효과를 없앰
+
+        *, *:hover, *:focus, *:active {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+- transition, ❗️Don't use `CSS keyframe` !
+
+        #element {
+            -webkit-transition: all .3s;
+            -moz-transition: all .3s;
+            -transition: all .3s;
+        }
+
+- scroll
+
+        #scroll {
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+- event handling
+
+        document.addEventListener("touchstart", function(){
+        
+        })
+
+- Use `prototype chain` when necessary
+
+        function app(){
+            if (window === this) {
+                return new_();
+            }
+            return this
+        }
+        
+        app.prototype = {
+            getInfo: function(){
+                console.log(v1.1.0 Cartoonsmart);
+            }
+        }
+        
+        app().getInfo()
+
+→ take less memory. 
+
+object 하나를 200번 만드는 것보다 shared object인 `prototype`을 사용한다.
+
+- index.html 구조
+
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <title>Cartoonsmart</title>
+            <meta name="format-detection" content="telephone=no" />
+            <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, width=device-width, height=device-height"/>
+            <link rel="stylesheet" href="css/ratchet.css"/>
+            <link rel="stylesheet" href="css/theme.css"/>
+            <script src="cordova.js"></script> <!-- App이 compile 될 때 자동으로 들어감. -->
+            <script src="js/ratchet.js"></script>
+            <script src="js/zepto.js"></script>
+          </head>
+          <body ontouchstart="">
+            <header class="bar bar-nav">
+              <h1 class="title">Cartoonsmart</h1>
+            </header>
+            <div class="content">
+              <div class="card">
+                <ul class="table-view">
+                  <li class="table-view-cell">
+                    <a class="push-right" href="#Modal" data-transition="slide-in" data-selector=".device-content">
+                        Open Model
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div id="Modal" class="modal">
+              <script src="js/cartoonsmart.js"></script>
+              <header class="bar bar-nav">
+                <a class="icon icon-close pull-right" href="#Modal"></a>
+                <h1 class="title">Modal</h1>
+              </header>
+              <div class="content">
+                <p class="content-padded">Your Content goes here....</p>
+              </div>
+            </div>
+          </body>
+        </html>
