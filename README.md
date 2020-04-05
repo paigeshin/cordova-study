@@ -2,9 +2,12 @@
 
 https://www.notion.so/Phonegap-Ludei-Build-HTML5-CSS-JS-Apps-dccbdd492ba842dcba245df0cfe2e7dc
 
+https://cordova.apache.org/plugins/ 
+=> 필요한 plugin 있을 때 마다 가서 확인함
+
 # Cordova &  Phonegap Setup
 
-### **What is cordova?**
+## **What is cordova?**
 
 [https://cordova.apache.org/docs/en/3.0.0/guide/overview/index.html](https://cordova.apache.org/docs/en/3.0.0/guide/overview/index.html) 
 
@@ -80,8 +83,8 @@ ios 설치 - 문제 없이 아주 잘됨
 - xCode 설치
 - cocoapod 설치
 
-    sudo npm install -g ios-sim
-    ios-sim showdevicetypes  #해당 directory로 가ㅓㅅ.
+        sudo npm install -g ios-sim
+        ios-sim showdevicetypes  #해당 directory로 가서함
 
 # Android 설치
 
@@ -92,10 +95,9 @@ android 설치
 - java 설치. ⇒ 이 부분은 android 내부 sdk에 설치되어있는 자바인지는 잘 모르겠음. 내 PC에는 이미 android 및 자바가 따로 따로 다 설치가 되어있었음.
 - android studio 설치 후 gradle은 따로 설치해줘야함
 
-    brew install gradle #gradle 설치 
-    brew reinstall gradle #재설치 
+        brew install gradle #gradle 설치 
+        brew reinstall gradle #재설치 
 
- 
 
 에러 내용
 
@@ -268,6 +270,8 @@ android 설치
             </platform>
         </widget>
 
+`<preference name="android-minSdkVersion" value="19" />` 이 부분을 14에서 19로 바꿔줌 
+
 avd machine이 실행이 안된다면, 아래 코드를 .bash_profile에 추가 
 
     # Android For Apache Cordova
@@ -277,7 +281,6 @@ avd machine이 실행이 안된다면, 아래 코드를 .bash_profile에 추가
     export PATH=$PATH:$ANDROID_HOME/tools/bin
     export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-`<preference name="android-minSdkVersion" value="19" />` 이 부분을 14에서 19로 바꿔줌 
 
 적어도 `x86` 으로 돌아가는 avd machine을 하나를 설치한다
 
@@ -435,3 +438,1341 @@ object 하나를 200번 만드는 것보다 shared object인 `prototype`을 사�
             </div>
           </body>
         </html>
+
+# Plugin & Library & Cordova API 
+
+### Zepto - library
+
+https://github.com/madrobby/zepto
+
+- Minimal Version jQuery
+
+
+# ❗️ Compatiability Issue
+
+- 가상기기에서 되는게 있고 안되는게 있다.
+- 실제 기기에서 되는게 있고 안되는게 있다.
+- API를 보다 보면 버전마다 되는 것이 있고 안되는 것도 있다.
+- 플랫폼마다 되는게 있고 안되는게 있다.
+- 어떤 플러그인을 설치했더니 ios는 잘되고 android에서는 build error가 발생하는 경우가 있다.
+- 테스트가 엄청 중요할 듯.
+
+# Cordova API
+
+- 일종의 패턴임 필요한 플러그인 찾고 가져와서 쓰고 코드 커스텀하는 것이 계속 반복
+
+        cordova plugin -ls
+
+⇒ 설치된 플러그인들 확인 
+
+### Zepto - library
+
+https://github.com/madrobby/zepto
+
+- Minimal Version jQuery
+
+### console
+
+- default로 깔려있음
+- debugging 용
+
+- html/css
+
+        <div id="Console" class="modal">
+          <script src="./js/console.js"></script>
+          <header class="bar bar-nav">
+            <a class="icon icon-close pull-right" href="#Console"></a>
+            <h1 class="title">Console</h1>
+          </header>
+          <div class="content">
+            <ul class="table-view">
+              <li class="table-view-cell"> <a id="Console1" href="#"> Log simple </a> </li>
+              <li class="table-view-cell"> <a id="Console2" href="#"> Log two arguments </a> </li>
+              <li class="table-view-divider"> Android Quirk: The Android console only accept's the first argument (device not emulator) and ignores all other values. </li>
+              <li class="table-view-cell"> <a id="Console3" href="#"> Log object </a> </li>
+              <li class="table-view-cell"> <a id="Console4" href="#"> Log array </a> </li>
+              <li class="table-view-cell"> <a id="Console5" href="#"> Log var value </a> </li>
+            </ul>
+          </div>
+        </div>
+
+- js
+
+    document.addEventListener("deviceready", consoleReady, false);
+    
+        function consoleReady() {
+        
+        $(function(){
+        
+            $('#Console1').on('touchend', function(){
+            
+            console.log("logged a string");
+            
+            });
+            
+            $('#Console2').on('touchend', function(){
+            
+            console.log( "string", 2 );
+            
+            });
+            
+            $('#Console3').on('touchend', function(){
+            
+            console.log( {"object":"Yup", "Num": 10} );
+            
+            });
+            
+            $('#Console4').on('touchend', function(){
+            
+            console.log( [ 1,"String",{"OBJ":"YUP!"},[1,2,3] ] );
+            
+            });
+            
+            $('#Console5').on('touchend', function(){
+            
+            var Log = [ 1,"String",{"OBJ":"YUP!"},[1,2,3] ];
+            
+            console.log( Log );
+            
+            });
+        
+        });
+    
+    }
+
+### Device - Plugin
+
+- Device 정보 가져옴
+
+[https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-device/](https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-device/)
+
+❗️ ios 에서 uuid api가 바뀌어서 접근하지 못함 
+
+- 설치
+
+        cordova plugin add cordova-plugin-device
+
+- html
+
+        <div id="Device" class="modal">
+              <script src="js/device.js"></script>
+              <header class="bar bar-nav">
+                <a class="icon icon-close pull-right" href="#Device"></a>
+                <h1 class="title">Device</h1>
+              </header>
+              <div class="content">
+                <ul class="table-view">
+                  <li class="table-view-cell"> <a id="DeviceLog" href="#"> Log out device object </a> </li>
+                  <li class="table-view-divider">
+                    Cordova  : <span id="Dev1">device.cordova</span><br/>
+                    Model  : <span id="Dev2">device.model</span><br/>
+                    Platform  : <span id="Dev3">device.platform</span><br/>
+        <!--            Universally Unique Identifier  : <span id="Dev4">device.uuid</span><br/>  ios에서 api 바뀜-->
+                    Version  : <span id="Dev5">device.version</span><br/>
+                  </li>
+                </ul>
+              </div>
+        </div>
+
+- js
+
+        //항상 deviceready event를 걸어줘야함
+        document.addEventListener("deviceready", deviceAPI, false);
+    
+        function deviceAPI(){
+        
+            $(function(){
+                $('#DeviceLog').on('touchend', function() {
+                    console.log(device);
+                    $('#Dev1').html(device.cordova);
+                    $('#Dev2').html(device.model);
+                    $('#Dev3').html(device.platform);
+                    // $('#Dev4').html(device.uuid);
+                    $('#Dev5').html(device.version);
+                });
+            });
+        
+        }
+
+### Event Handling
+
+- cordova default API
+- html
+
+        <div id="Events" class="modal">
+            <script src="js/events.js"></script>
+            <header class="bar bar-nav">
+                <a class="icon icon-close pull-right" href="#Events"></a>
+                <h1 class="title">Events</h1>
+            </header>
+            <div class="content">
+                <ul class="table-view">
+                    <li class="table-view-cell"> Paused <span id="paused">0</span> </li>
+                    <li class="table-view-cell"> resumed <span id="resumed">0</span> </li>
+                    <li class="table-view-divider">Android (some versions) and others...</li>
+                    <li class="table-view-cell"> Back Button <span id="backEvent">0</span> </li>
+                    <li class="table-view-cell"> Volume Up <span id="volumeUp">0</span> </li>
+                    <li class="table-view-cell"> Volume Down <span id="volumeDown">0</span> </li>
+                    <li class="table-view-divider">Android deprecated...</li>
+                    <li class="table-view-cell"> Search Button <span id="searchEvent">0</span> </li>
+                    <li class="table-view-cell"> Menu Button <span id="menuEvent">0</span> </li>
+                </ul>
+            </div>
+        </div>
+
+- js
+
+        //Android Activity Life Cycle, iOS View Life Cycle과 같은 것도 추적 가능하다.
+        
+        document.addEventListener("deviceready", eventsAPI, false);
+        
+        function eventsAPI() {
+        
+            $(function(){
+        
+                var paused = 0, resumed = 0, back = 0, volup = 0, voldown = 0, menu = 0, search = 0;
+        
+                document.addEventListener('pause', pause, false);
+        
+                function pause() {
+                    $('#paused').html( paused += 1 );
+                }
+        
+                document.addEventListener('resume', resume, false);
+        
+                function resume() {
+                    $('#resumed').html( resumed += 1 );
+                }
+        
+                // Android
+        
+                document.addEventListener("backbutton", backbtn, false);
+        
+                function backbtn() {
+                    $('#backEvent').html( back += 1 );
+                }
+        
+                document.addEventListener('volumeupbutton', volumeup, false);
+        
+                function volumeup() {
+                    $('#volumeUp').html( volup += 1 );
+                }
+        
+                document.addEventListener('volumedownbutton', volumedown, false);
+        
+                function volumedown() {
+                    $('#volumeDown').html( voldown += 1 );
+                }
+        
+                // Android deprecated
+        
+                document.addEventListener('menubutton', menubtn, false);
+        
+                function menubtn() {
+                    $('#menuEvent').html( menu += 1 );
+                }
+        
+                document.addEventListener('searchbutton', searchbtn, false);
+        
+                function searchbtn() {
+                    $('#searchEvent').html( search += 1 );
+                }
+        
+            });
+        
+        }
+
+### Vibration
+
+- 이미 깔려있음
+
+- html/css
+
+        <div id="Vibration" class="modal">
+            <script src="js/vibration.js"></script>
+            <header class="bar bar-nav">
+                <a class="icon icon-close pull-right" href="#Vibration"></a>
+                <h1 class="title">Vibration</h1>
+            </header>
+            <div class="content">
+                <div class="card">
+                    <ul class="table-view">
+                        <li class="table-view-cell"> <a id="VibrateNormal" href="#"> Vibrate </a> </li>
+                        <li class="table-view-cell"> <a id="VibratePattern" href="#"> Vibrate Pattern </a> </li>
+                        <li class="table-view-cell"> <a id="VibrateCancel" href="#"> Vibrate Cancel </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+- js
+
+        document.addEventListener("deviceready", vibrationAPI, false);
+        
+        function vibrationAPI() {
+        
+            $(function(){
+        
+                // iOS ignores vibrate time and is preset
+                // WP8 min 1000ms to max 5000ms
+                $('#VibrateNormal').on('touchend',function(){
+                    navigator.vibrate(1000);
+                });
+        
+                // iOS and WP8 doesn't support vibrate pattern
+                $('#VibratePattern').on('touchend',function(){
+                    navigator.vibrate([500,2000,500,1000,500,2000,1000]);
+                });
+        
+                // Passing 0 or empty array [] or array with the value of [0] it will cancel
+                // Is NOT supported on iOS
+                $('#VibrateCancel').on('touchend',function(){
+                    navigator.vibrate([0]);
+                });
+        
+            });
+        
+        }
+
+### Battery
+
+- 설치
+
+        cordova plugin add cordova-plugin-battery-status
+
+- html
+
+        <div id="Battery" class="modal">
+            <script src="js/battery.js"></script>
+            <header class="bar bar-nav">
+              <a class="icon icon-close pull-right" href="#Battery"></a>
+              <h1 class="title">Battery Status</h1>
+            </header>
+            <div class="content">
+              <div class="card">
+                <ul class="table-view">
+                  <li class="table-view-divider">
+                    Event Fired : <span id="BatteryEvent">...</span><br/>
+                    Battery level : <span id="BatteryLevel">...</span><br/>
+                    Device plugged in : <span id="BatteryPlugged">...</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+- js
+
+        document.addEventListener("deviceready", batteryStatus, false);
+        
+        function batteryStatus() {
+        
+            $(function(){
+        
+                window.addEventListener("batterystatus", onBatteryChange, false);
+        
+                function onBatteryChange(info) {
+                    $('#BatteryEvent').html('Battery Status');
+                    $('#BatteryLevel').html( info.level );
+                    $('#BatteryPlugged').html( info.isPlugged );
+                }
+        
+                window.addEventListener("batterylow", onBatteryLow, false);
+        
+                function onBatteryLow(info) {
+                    $('#BatteryEvent').html('Battery Low');
+                    $('#BatteryLevel').html( info.level );
+                    $('#BatteryPlugged').html( info.isPlugged );
+                }
+        
+                window.addEventListener("batterycritical", onBatteryCritical, false);
+        
+                function onBatteryCritical(info) {
+                    $('#BatteryEvent').html('Battery Critical');
+                    $('#BatteryLevel').html( info.level );
+                    $('#BatteryPlugged').html( info.isPlugged );
+                }
+        
+            });
+        
+        }
+
+### In app Browser
+
+- 앱 내부에서 브라우저 열어줌
+
+- 설치
+
+        cordova plugin add cordova-plugin-inappbrowser
+
+- html
+
+        <div id="Browser" class="modal">
+            <script src="js/browser.js"></script>
+            <header class="bar bar-nav">
+                <a class="icon icon-close pull-right" href="#Browser"></a>
+                <h1 class="title">In App Browser</h1>
+            </header>
+            <div class="content">
+                <div class="card">
+                    <ul class="table-view">
+                        <li class="table-view-cell"> <a id="openNormal" href="http://www.cartoonsmart.com" target="_system"> Open Normal </a> </li>
+                        <li class="table-view-cell"> <a id="openWin" href="http://www.cartoonsmart.com" target="_blank"> Open Link </a> </li>
+                        <li class="table-view-cell"> <a id="openWithOptions" href="#"> Window with Option's </a> </li>
+                        <li class="table-view-cell"> <a id="openWithEvents" href="#"> Open Window with Events </a> </li>
+                        <li class="table-view-cell"> <a id="openCloseWin" href="#"> Open &amp; Close </a> </li>
+                        <li class="table-view-cell"> <a id="passCSS" href="#"> Passing CSS </a> </li>
+                        <li class="table-view-cell"> <a id="passJS" href="#"> Passing JS </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+- js
+
+        document.addEventListener("deviceready", inAppBrowserAPI, false);
+        
+        function inAppBrowserAPI() {
+        
+            $(function(){
+        
+                $('#openNormal').on('touchend',function(){
+        
+                    window.open('http://www.cartoonsmart.com/', '_system');
+        
+                });
+        
+                $('#openWin').on('touchend',function(){
+        
+                    window.open('http://www.cartoonsmart.com/', '_blank');
+        
+                });
+        
+                $('#openWithOptions').on('touchend',function(){
+        
+                    var optionsArr = [
+                        // For all OS's
+                        'location=no',
+                        
+                        // For Android, iOS & Windows Phone only
+                        'hidden=yes',
+                        
+                        // Android and iOS only
+                        'clearcache=yes',
+                        'clearsessioncache=yes',
+                        
+                        // iOS only
+                        // Transition style options are fliphorizontal, crossdissolve or coververtical (Default)
+                        'transitionstyle=fliphorizontal',
+                        'toolbar=yes',
+                        'closebuttoncaption=Exit',
+                        // Tool bar position options are top or bottom (Default)
+                        'toolbarposition=top',
+                        'disallowoverscroll=yes',
+                        'enableViewportScale=yes',
+                        'mediaPlaybackRequiresUserAction=yes',
+                        'allowInlineMediaPlayback=yes',
+                        'keyboardDisplayRequiresUserAction=no',
+                        'suppressesIncrementalRendering=yes',
+                        // Presentation style options are pagesheet, formsheet or fullscreen (Default)
+                        'presentationstyle=formsheet',
+        
+                        // Android only
+                        'zoom=no',
+                        'hardwareback=no',
+                        
+                        // Windows only
+                        // If location is set to no there be no control presented to user to close IAB window.
+                        'fullscreen=yes'
+                    ];
+        
+                    var options = optionsArr.join();
+        
+                    var browserOptions = window.open('http://www.cartoonsmart.com/', '_blank', options );
+        
+                    browserOptions.show();
+        
+                });
+        
+                function BrowserCallback( event ) {
+                     console.log(event, event.type, event.url);
+                 }
+        
+                $('#openWithEvents').on('touchend',function(){
+        
+                    var eventfulBrowser = window.open('http://www.cartoonsmart.com/', '_blank');
+        
+                    eventfulBrowser.addEventListener('loadstart', BrowserCallback);
+                     eventfulBrowser.addEventListener('loadstop',  BrowserCallback);
+                     eventfulBrowser.addEventListener('loaderror', BrowserCallback);
+                     eventfulBrowser.addEventListener(  'exit',      BrowserCallback);
+        
+                });
+        
+                $('#openCloseWin').on('touchend',function(){
+        
+                    var browserClose = window.open('http://www.cartoonsmart.com/', '_blank');
+        
+                    setTimeout(function(){
+                        browserClose.close();
+                    },3000);
+        
+                });
+        
+                $('#passCSS').on('touchend',function(){
+        
+                    var browserCSS = window.open('http://www.cartoonsmart.com/', '_blank');
+        
+                    browserCSS.addEventListener('loadstop',  function(){
+                        
+                        browserCSS.insertCSS(
+                            
+                            { file: 'styles.css' }
+        
+                        );
+        
+                        browserCSS.insertCSS(
+                            
+                            { code: 'body #mobile-header { background-color:black; }' }
+        
+                        );
+                    });
+        
+                });
+        
+        
+                $('#passJS').on('touchend',function(){
+        
+                    var browserJS = window.open('http://www.cartoonsmart.com/', '_blank');
+        
+                    browserJS.addEventListener('loadstop',  function(){
+                        
+                        browserJS.executeScript(
+                            
+                            { file: 'Cartoonsmart.js', }
+        
+                        );
+        
+                        browserJS.executeScript(
+                            
+                            { code: 'alert("YUP");' }
+        
+                        );
+        
+                    });
+        
+                });
+        
+        
+        
+            });
+        
+        }
+
+- option - option 값을 잘 활용하자
+
+        //option 값을 잘 활용하자
+        $('#openWithOptions').on('touchend',function(){
+        
+            var optionsArr = [
+                // For all OS's
+                'location=no',
+                
+                // For Android, iOS & Windows Phone only
+                'hidden=yes',
+                
+                // Android and iOS only
+                'clearcache=yes',
+                'clearsessioncache=yes',
+                
+                // iOS only
+                // Transition style options are fliphorizontal, crossdissolve or coververtical (Default)
+                'transitionstyle=fliphorizontal',
+                'toolbar=yes',
+                'closebuttoncaption=Exit',
+                // Tool bar position options are top or bottom (Default)
+                'toolbarposition=top',
+                'disallowoverscroll=yes',
+                'enableViewportScale=yes',
+                'mediaPlaybackRequiresUserAction=yes',
+                'allowInlineMediaPlayback=yes',
+                'keyboardDisplayRequiresUserAction=no',
+                'suppressesIncrementalRendering=yes',
+                // Presentation style options are pagesheet, formsheet or fullscreen (Default)
+                'presentationstyle=formsheet',
+        
+                // Android only
+                'zoom=no',
+                'hardwareback=no',
+                
+                // Windows only
+                // If location is set to no there be no control presented to user to close IAB window.
+                'fullscreen=yes'
+            ];
+        
+            var options = optionsArr.join();
+        
+            var browserOptions = window.open('http://www.cartoonsmart.com/', '_blank', options );
+        
+            browserOptions.show();
+        
+        });
+
+- Event Handling
+
+        //Event Handling
+                function BrowserCallback( event ) {
+                     console.log(event, event.type, event.url);
+                 }
+        
+                $('#openWithEvents').on('touchend',function(){
+        
+                    var eventfulBrowser = window.open('http://www.cartoonsmart.com/', '_blank');
+        
+                    eventfulBrowser.addEventListener('loadstart', BrowserCallback);
+                     eventfulBrowser.addEventListener('loadstop',  BrowserCallback);
+                     eventfulBrowser.addEventListener('loaderror', BrowserCallback);
+                     eventfulBrowser.addEventListener(  'exit',      BrowserCallback);
+        
+                });
+        
+                $('#openCloseWin').on('touchend',function(){
+        
+                    var browserClose = window.open('http://www.cartoonsmart.com/', '_blank');
+        
+                    setTimeout(function(){
+                        browserClose.close();
+                    },3000);
+        
+                });
+        
+                $('#passCSS').on('touchend',function(){
+        
+                    var browserCSS = window.open('http://www.cartoonsmart.com/', '_blank');
+        
+                    browserCSS.addEventListener('loadstop',  function(){
+                        
+                        browserCSS.insertCSS(
+                            
+                            { file: 'styles.css' }
+        
+                        );
+        
+                        browserCSS.insertCSS(
+                            
+                            { code: 'body #mobile-header { background-color:black; }' }
+        
+                        );
+                    });
+        
+                });
+        
+        
+                $('#passJS').on('touchend',function(){
+        
+                    var browserJS = window.open('http://www.cartoonsmart.com/', '_blank');
+        
+                    browserJS.addEventListener('loadstop',  function(){
+                        
+                        browserJS.executeScript(
+                            
+                            { file: 'Cartoonsmart.js', }
+        
+                        );
+        
+                        browserJS.executeScript(
+                            
+                            { code: 'alert("YUP");' }
+        
+                        );
+        
+                    });
+        
+                });
+
+### Status Bar
+
+- default
+
+- config.xml
+
+        <!-- Status bar preferences -->
+        <preference name="StatusBarOverlaysWebView" value="true" />
+        <preference name="StatusBarBackgroundColor" value="#aaaaaa" />
+        <preference name="StatusBarStyle" value="default" />
+
+⇒ Status bar는  config에 추가해줘야함
+
+- html
+
+        <div id="Statusbar" class="modal">
+            <script src="js/statusbar.js"></script>
+            <header class="bar bar-nav">
+                <a class="icon icon-close pull-right" href="#Statusbar"></a>
+                <h1 class="title">Statusbar</h1>
+            </header>
+            <div class="content">
+                <div class="card">
+                    <ul class="table-view">
+                        <li class="table-view-divider">Ios Only</li>
+                        <li class="table-view-cell"><a id="OverlayFalse" href="#"> Overlay False </a></li>
+                        <li class="table-view-cell"><a id="OverlayTrue" href="#"> Overlay True </a></li>
+                        <li class="table-view-divider">Android, iOS and Windows Phone</li>
+                        <li class="table-view-cell"><a id="StatusHide" href="#"> Hide </a></li>
+                        <li class="table-view-cell"><a id="StatusShow" href="#"> Show </a></li>
+                        <li class="table-view-cell"><a id="StatusToggle" href="#"> Toggle </a></li>
+                        <li class="table-view-divider">Android 5+, iOS and Windows Phone</li>
+                        <li class="table-view-cell"><a id="StatusColor" href="#"> Status Color </a></li>
+                        <li class="table-view-cell"><a id="StatusColorHEX" href="#"> Status Color HEX </a></li>
+                        <li class="table-view-divider">iOS and Windows Phone</li>
+                        <li class="table-view-cell"><a id="StatusDefault" href="#"> Status Default </a></li>
+                        <li class="table-view-cell"><a id="StatusLightContent" href="#"> Status Light Content </a></li>
+                        <li class="table-view-cell"><a id="StatusBlackTranslucent" href="#"> Status Black Translucent </a></li>
+                        <li class="table-view-cell"><a id="StatusBlackOpaque" href="#"> Status Black Opaque </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+- js
+
+        document.addEventListener("deviceready", statusbarAPI, false);
+        
+        function statusbarAPI() {
+        
+            $(function(){
+        
+                $('#OverlayFalse').on('touchend',function(){
+                    StatusBar.overlaysWebView(false);
+                });
+        
+                $('#OverlayTrue').on('touchend',function(){
+                    StatusBar.overlaysWebView(true);
+                });
+        
+                // iOS, Android and Windows Phone
+        
+                $('#StatusHide').on('touchend',function(){
+                    StatusBar.hide();
+                });
+        
+                $('#StatusShow').on('touchend',function(){
+                    StatusBar.show();
+                });
+        
+                $('#StatusToggle').on('touchend',function(){
+                    
+                    if(StatusBar.isVisible === true){
+                        StatusBar.hide();
+                    } else {
+                        StatusBar.show();
+                    }
+        
+                });
+        
+                // Android 5+, iOS and Windows Phone...
+        
+                $('#StatusColor').on('touchend',function(){
+                    /* black, darkGray, lightGray, white, gray, red, green, 
+                       blue, cyan, yellow, magenta, orange, purple, brown */
+                    StatusBar.backgroundColorByName('blue');
+                });
+        
+                $('#StatusColorHEX').on('touchend',function(){
+                    StatusBar.backgroundColorByHexString("#ff9462");
+                });
+        
+                // iOS and Windows Phone
+        
+                $('#StatusDefault').on('touchend',function(){
+                    StatusBar.styleDefault();
+                });
+        
+                $('#StatusLightContent').on('touchend',function(){
+                    StatusBar.styleLightContent();
+                });
+        
+                $('#StatusBlackTranslucent').on('touchend',function(){
+                    StatusBar.styleBlackTranslucent();
+                });
+        
+                $('#StatusBlackOpaque').on('touchend',function(){
+                    StatusBar.styleBlackOpaque();
+                });
+        
+            });
+        
+        }
+
+### Networking
+
+- 설치
+
+        cordova plugin add cordova-plugin-network-information
+
+- html
+
+        <div id="Network" class="modal">
+            <script src="js/network.js"></script>
+            <header class="bar bar-nav">
+                <a class="icon icon-close pull-right" href="#Network"></a>
+                <h1 class="title">Network</h1>
+            </header>
+            <div class="content">
+                <div class="card">
+                    <ul class="table-view">
+                        <li class="table-view-divider">Network type...</li>
+                        <li class="table-view-cell"><a href="#" id="NetworkGet" class="push-right">Get Network Information</a></li>
+                        <li class="table-view-cell" id="NetworkDisplay">...</li>
+                        <li class="table-view-divider">Network Event</li>
+                        <li class="table-view-cell" id="NetworkEvent">...</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+- js
+
+        document.addEventListener("deviceready", networkAPI, false);
+        
+        function networkAPI() {
+        
+            $(function(){
+        
+                $('#NetworkGet').on('touchend',function(){
+        
+                    var networkState = navigator.connection.type;
+        
+                    var states = {};
+                    states[Connection.UNKNOWN]  = 'Unknown connection';
+                    states[Connection.ETHERNET] = 'Ethernet connection';
+                    states[Connection.WIFI]     = 'WiFi connection';
+                    states[Connection.CELL_2G]  = 'Cell 2G connection';
+                    states[Connection.CELL_3G]  = 'Cell 3G connection';
+                    states[Connection.CELL_4G]  = 'Cell 4G connection';
+                    states[Connection.CELL]     = 'Cell generic connection';
+                    states[Connection.NONE]     = 'No network connection';
+        
+                    $('#NetworkDisplay').html(states[networkState]);
+        
+                    console.log(networkState,states);
+        
+                });
+        
+                document.addEventListener("online", onOnline, false);
+        
+                function onOnline() {
+                    $('#NetworkEvent').html('We\'re online!');
+                }
+        
+                document.addEventListener("offline", onOffline, false);
+        
+                function onOffline() {
+                    $('#NetworkEvent').html('Offline please connect...');
+                }
+        
+            });
+        
+        }
+
+### Dialog
+
+- 설치
+
+        cordova plugin add cordova-plugin-dialogs
+
+- html
+
+        <div id="Dialogs" class="modal">
+            <script src="js/dialog.js"></script>
+            <header class="bar bar-nav">
+                <a class="icon icon-close pull-right" href="#Dialogs"></a>
+                <h1 class="title">Dialogs</h1>
+            </header>
+            <div class="content">
+                <div class="card">
+                    <ul class="table-view">
+                        <li class="table-view-divider">Returned information...</li>
+                        <li class="table-view-cell" id="DialogReturn">...</li>
+                        <li class="table-view-divider">Open Dialogs</li>
+                        <li class="table-view-cell"><a href="#" id="OpenDialog">Open Dialog</a></li>
+                        <li class="table-view-cell"><a href="#" id="OpenConfirmDialog">Open Confirm Dialog</a></li>
+                        <li class="table-view-cell"><a href="#" id="OpenPromptDialog">Open Prompt Dialog</a></li>
+                        <li class="table-view-cell"><a href="#" id="OpenBeepDialog">Open Beep Dialog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+- js
+
+        document.addEventListener("deviceready", dialogsAPI, false);
+        
+        function dialogsAPI(){
+        
+            $(function(){
+        
+                // function DialogReturned(msg) {
+                //     $("#DialogReturn").html(msg);
+                // }
+        
+                $("#OpenDialog").on("touched", function(){
+                    navigator.notification.alert(
+                        "You are the winner!",
+                        null,
+                        "Game Over",
+                        "Done"
+                    );
+                });
+        
+        
+            });
+        
+        
+        }
+
+### Accelerometer
+
+- Gaming에 매우 중요함
+
+- 설치
+
+        cordova plugin add cordova-plugin-device-motion
+
+- html
+
+        <div id="Accelerometer" class="modal">
+            <script src="js/accelerometer.js"></script>
+            <header class="bar bar-nav">
+                <a class="icon icon-close pull-right" href="#Accelerometer"></a>
+                <h1 class="title">Accelerometer</h1>
+            </header>
+            <div class="content">
+                <div class="card">
+                    <ul class="table-view">
+                        <li class="table-view-divider">Get or Watch Accelerometer</li>
+                        <li class="table-view-cell"><a href="#" id="GetValues">Get Values</a></li>
+                        <li class="table-view-cell"><a href="#" id="WatchValues">Watch Values</a></li>
+                        <li class="table-view-cell"><a href="#" id="StopWatching">Stop Watching</a></li>
+                        <li class="table-view-divider">X, Y &amp; Z Values</li>
+                        <li class="table-view-cell">X : <span id="X"></span></li>
+                        <li class="table-view-cell">Y : <span id="Y"></span></li>
+                        <li class="table-view-cell">Z : <span id="Z"></span></li>
+                        <li class="table-view-cell">Timestamp : <span id="stamp"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+- js
+
+        document.addEventListener("deviceready", accelerometerAPI, false);
+        
+        function accelerometerAPI() {
+        
+            $(function(){
+        
+                function onSuccess(acceleration) {
+                    $('#X').html(      acceleration.x          );
+                    $('#Y').html(      acceleration.y          );
+                    $('#Z').html(     acceleration.z          );
+                    $('#stamp').html( new Date(acceleration.timestamp) );
+                }
+        
+                function onError() {
+                    $('#X, #Y, #Z, #stamp').html('Error!!');
+                };
+        
+                $('#GetValues').on('touchend',function(){
+        
+                    navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);
+        
+                });
+        
+                var watchID;
+        
+                $('#WatchValues').on('touchend',function(){
+        
+                    watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, { frequency: 100  } );
+        
+                });
+        
+                $('#StopWatching').on('touchend',function(){
+        
+                    if (watchID) {
+                        navigator.accelerometer.clearWatch(watchID);
+                        watchID = null;
+                    }
+        
+                    $('#X, #Y, #Z, #stamp').html('');
+        
+                });
+        
+            });
+        
+        }
+
+### Compass
+
+- Magnetic sensor
+
+- 설치
+
+        cordova plugin add cordova-plugin-device-orientation
+
+- html
+
+        <div id="Compass" class="modal">
+            <script src="js/compass.js"></script>
+            <header class="bar bar-nav">
+                <a id="compassClose" class="icon icon-close pull-right" href="#Compass"></a>
+                <h1 class="title">Compass</h1>
+            </header>
+            <div class="content">
+                <div id="compassShow">
+                    <p>True Heading...</p>
+                    <div class="compass">
+                        <img id="NeedleTrue" src="images/compass_needle.svg" alt="Compass Needle"/>
+                    </div>
+                    <p>Magnetic Heading...</p>
+                    <div class="compass">
+                        <img id="NeedleMagnetic" src="images/compass_needle.svg" alt="Compass Needle"/>
+                    </div>
+                    <p>
+                        Accuracy: <span id="compassAccuracy">...</span> <br/>
+                        Time: <span id="compassStamp">...</span>
+                    </p>
+                </div>
+                <ul class="table-view">
+                    <li class="table-view-cell"><a href="#" id="GetHeading">Get Heading</a></li>
+                    <li class="table-view-cell"><a href="#" id="WatchHeading">Watch Heading</a></li>
+                    <li class="table-view-cell"><a href="#" id="StopHeading">Stop Watching Heading</a></li>
+                </ul>
+            </div>
+        </div>
+
+- css
+
+        #compassShow {
+            position: relative;
+            z-index: 2;
+            background: white;
+            text-align: center;
+            color:#777;
+            box-shadow: 0 1px 3px rgba(0,0,0,.5);
+        }
+        
+        #compassShow p {
+            padding: 25px 0;
+            margin: 0;
+        }
+        
+        #compassShow .compass {
+            position: relative;
+            overflow: hidden;
+            width: 125px;
+            height: 125px;
+            background: url('../images/compass.svg') no-repeat center center;
+            background-size:100% 100%;
+            margin:0 auto;
+        }
+        
+        #compassShow img {
+            margin-top: 5px;
+            height: 90%;
+        }
+        
+        #compassShow p:last-child {
+            text-align: left;
+            padding-left: 20px;
+        }
+
+- images/compass.svg
+
+        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+        <svg
+           xmlns:dc="http://purl.org/dc/elements/1.1/"
+           xmlns:cc="http://creativecommons.org/ns#"
+           xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           xmlns:svg="http://www.w3.org/2000/svg"
+           xmlns="http://www.w3.org/2000/svg"
+           version="1.1"
+           id="svg2"
+           viewBox="0 0 320 320.00001"
+           height="320"
+           width="320">
+          <defs
+             id="defs4">
+            <filter
+               id="filter4788"
+               style="color-interpolation-filters:sRGB;">
+              <feFlood
+                 id="feFlood4790"
+                 result="flood"
+                 flood-color="rgb(0,0,0)"
+                 flood-opacity="0.176471" />
+              <feComposite
+                 id="feComposite4792"
+                 result="composite1"
+                 operator="out"
+                 in2="SourceGraphic"
+                 in="flood" />
+              <feGaussianBlur
+                 id="feGaussianBlur4794"
+                 result="blur"
+                 stdDeviation="0"
+                 in="composite1" />
+              <feOffset
+                 id="feOffset4796"
+                 result="offset"
+                 dy="4.5"
+                 dx="1.3" />
+              <feComposite
+                 id="feComposite4798"
+                 result="fbSourceGraphic"
+                 operator="atop"
+                 in2="SourceGraphic"
+                 in="offset" />
+              <feColorMatrix
+                 id="feColorMatrix5136"
+                 values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+                 in="fbSourceGraphic"
+                 result="fbSourceGraphicAlpha" />
+              <feFlood
+                 in="fbSourceGraphic"
+                 result="flood"
+                 flood-color="rgb(0,0,0)"
+                 flood-opacity="0.0470588"
+                 id="feFlood5138" />
+              <feComposite
+                 result="composite1"
+                 operator="out"
+                 in="flood"
+                 in2="fbSourceGraphic"
+                 id="feComposite5140" />
+              <feGaussianBlur
+                 result="blur"
+                 stdDeviation="0"
+                 in="composite1"
+                 id="feGaussianBlur5142" />
+              <feOffset
+                 result="offset"
+                 dy="13.8"
+                 dx="26.1"
+                 id="feOffset5144" />
+              <feComposite
+                 result="composite2"
+                 operator="atop"
+                 in="offset"
+                 in2="fbSourceGraphic"
+                 id="feComposite5146" />
+            </filter>
+          </defs>
+          <metadata
+             id="metadata7">
+            <rdf:RDF>
+              <cc:Work
+                 rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type
+                   rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                <dc:title></dc:title>
+              </cc:Work>
+            </rdf:RDF>
+          </metadata>
+          <g
+             transform="translate(0,-732.36216)"
+             id="layer1">
+            <circle
+               transform="scale(1,-1)"
+               r="160"
+               cy="-892.36218"
+               cx="160.00002"
+               id="path4136"
+               style="fill:#e6e6e6;stroke:none;stroke-width:0" />
+            <circle
+               r="150"
+               cy="892.36218"
+               cx="160"
+               id="path4160"
+               style="fill:#ffffff;stroke:none;stroke-width:0;filter:url(#filter4788)" />
+          </g>
+        </svg>
+
+- images/compass_needle.svg
+
+        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+        <svg
+           xmlns:dc="http://purl.org/dc/elements/1.1/"
+           xmlns:cc="http://creativecommons.org/ns#"
+           xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           xmlns:svg="http://www.w3.org/2000/svg"
+           xmlns="http://www.w3.org/2000/svg"
+           version="1.1"
+           id="svg2"
+           viewBox="0 0 22 280.00001"
+           height="280"
+           width="22">
+          <defs
+             id="defs4">
+            <filter
+               id="filter4788"
+               style="color-interpolation-filters:sRGB">
+              <feFlood
+                 id="feFlood4790"
+                 result="flood"
+                 flood-color="rgb(0,0,0)"
+                 flood-opacity="0.176471" />
+              <feComposite
+                 id="feComposite4792"
+                 result="composite1"
+                 operator="out"
+                 in2="SourceGraphic"
+                 in="flood" />
+              <feGaussianBlur
+                 id="feGaussianBlur4794"
+                 result="blur"
+                 stdDeviation="0"
+                 in="composite1" />
+              <feOffset
+                 id="feOffset4796"
+                 result="offset"
+                 dy="4.5"
+                 dx="1.3" />
+              <feComposite
+                 id="feComposite4798"
+                 result="fbSourceGraphic"
+                 operator="atop"
+                 in2="SourceGraphic"
+                 in="offset" />
+              <feColorMatrix
+                 id="feColorMatrix5136"
+                 values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+                 in="fbSourceGraphic"
+                 result="fbSourceGraphicAlpha" />
+              <feFlood
+                 in="fbSourceGraphic"
+                 result="flood"
+                 flood-color="rgb(0,0,0)"
+                 flood-opacity="0.0470588"
+                 id="feFlood5138" />
+              <feComposite
+                 result="composite1"
+                 operator="out"
+                 in="flood"
+                 in2="fbSourceGraphic"
+                 id="feComposite5140" />
+              <feGaussianBlur
+                 result="blur"
+                 stdDeviation="0"
+                 in="composite1"
+                 id="feGaussianBlur5142" />
+              <feOffset
+                 result="offset"
+                 dy="13.8"
+                 dx="26.1"
+                 id="feOffset5144" />
+              <feComposite
+                 result="composite2"
+                 operator="atop"
+                 in="offset"
+                 in2="fbSourceGraphic"
+                 id="feComposite5146" />
+            </filter>
+          </defs>
+          <metadata
+             id="metadata7">
+            <rdf:RDF>
+              <cc:Work
+                 rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type
+                   rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                <dc:title></dc:title>
+              </cc:Work>
+            </rdf:RDF>
+          </metadata>
+          <g
+             transform="translate(0,-772.36216)"
+             id="layer1">
+            <g
+               transform="translate(-148.49242,20.000022)"
+               id="g5242">
+              <g
+                 id="g5236"
+                 transform="translate(3.3e-5,3.3e-5)">
+                <path
+                   transform="matrix(0.11382679,0,0,0.92000534,141.17365,28.655764)"
+                   d="M 248.57142,938.79076 72.865852,938.80585 160.70557,786.63282 Z"
+                   id="path5186"
+                   style="fill:#ff0000;stroke:none;stroke-width:0" />
+                <path
+                   style="fill:#808080;stroke:none;stroke-width:0"
+                   id="path5234"
+                   d="M 248.57142,938.79076 72.865852,938.80585 160.70557,786.63282 Z"
+                   transform="matrix(-0.11382679,0,0,-0.92000534,177.76182,1756.0685)" />
+              </g>
+              <circle
+                 style="fill:#cccccc;stroke:none;stroke-width:0"
+                 id="path5240"
+                 cx="159.49242"
+                 cy="892.36218"
+                 r="11" />
+            </g>
+          </g>
+        </svg>
+
+- js
+
+        document.addEventListener("deviceready", compassAPI, false);
+        
+        function compassAPI() {
+        
+            $(function(){
+        
+                function compassSuccess(heading) {
+                    $('#NeedleTrue').css('-webkit-transform', 'rotate('+ heading.trueHeading + 'deg)');
+                    $('#NeedleMagnetic').css('-webkit-transform', 'rotate('+ heading.magneticHeading + 'deg)');
+                    $('#compassAccuracy').html( heading.headingAccuracy );
+                    $('#compassStamp').html( new Date(heading.timestamp) );
+                };
+        
+                function compassError(error) {
+                    alert('CompassError: ' + error.code);
+                };
+        
+                $('#GetHeading').on('touchend',function(){
+        
+                    navigator.compass.getCurrentHeading(compassSuccess, compassError);
+        
+                });
+        
+                var watchCompass = false;
+        
+                $('#WatchHeading').on('touchend',function(){
+        
+                    if( watchCompass === false ) {
+                        watchCompass = navigator.compass.watchHeading(compassSuccess, compassError, { 'frequency': 20 /*, 'filter':50 */ } );
+                    }
+        
+                });
+        
+                $('#StopHeading , #compassClose').on('touchstart',function(){
+        
+                    if( watchCompass !== false ) {
+                        navigator.compass.clearWatch(watchCompass);
+                        watchCompass = false;
+                    }
+        
+                });
+        
+                $('#StopHeading , #compassClose').on('touchend',function(){
+        
+                    $('#NeedleTrue , #NeedleMagnetic').removeAttr('style')
+                    $('#compassAccuracy , #compassStamp').html('...');
+        
+                });
+              
+            });
+        
+        }

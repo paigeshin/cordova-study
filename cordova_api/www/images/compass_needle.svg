@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg2"
+   viewBox="0 0 22 280.00001"
+   height="280"
+   width="22">
+  <defs
+     id="defs4">
+    <filter
+       id="filter4788"
+       style="color-interpolation-filters:sRGB">
+      <feFlood
+         id="feFlood4790"
+         result="flood"
+         flood-color="rgb(0,0,0)"
+         flood-opacity="0.176471" />
+      <feComposite
+         id="feComposite4792"
+         result="composite1"
+         operator="out"
+         in2="SourceGraphic"
+         in="flood" />
+      <feGaussianBlur
+         id="feGaussianBlur4794"
+         result="blur"
+         stdDeviation="0"
+         in="composite1" />
+      <feOffset
+         id="feOffset4796"
+         result="offset"
+         dy="4.5"
+         dx="1.3" />
+      <feComposite
+         id="feComposite4798"
+         result="fbSourceGraphic"
+         operator="atop"
+         in2="SourceGraphic"
+         in="offset" />
+      <feColorMatrix
+         id="feColorMatrix5136"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feFlood
+         in="fbSourceGraphic"
+         result="flood"
+         flood-color="rgb(0,0,0)"
+         flood-opacity="0.0470588"
+         id="feFlood5138" />
+      <feComposite
+         result="composite1"
+         operator="out"
+         in="flood"
+         in2="fbSourceGraphic"
+         id="feComposite5140" />
+      <feGaussianBlur
+         result="blur"
+         stdDeviation="0"
+         in="composite1"
+         id="feGaussianBlur5142" />
+      <feOffset
+         result="offset"
+         dy="13.8"
+         dx="26.1"
+         id="feOffset5144" />
+      <feComposite
+         result="composite2"
+         operator="atop"
+         in="offset"
+         in2="fbSourceGraphic"
+         id="feComposite5146" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,-772.36216)"
+     id="layer1">
+    <g
+       transform="translate(-148.49242,20.000022)"
+       id="g5242">
+      <g
+         id="g5236"
+         transform="translate(3.3e-5,3.3e-5)">
+        <path
+           transform="matrix(0.11382679,0,0,0.92000534,141.17365,28.655764)"
+           d="M 248.57142,938.79076 72.865852,938.80585 160.70557,786.63282 Z"
+           id="path5186"
+           style="fill:#ff0000;stroke:none;stroke-width:0" />
+        <path
+           style="fill:#808080;stroke:none;stroke-width:0"
+           id="path5234"
+           d="M 248.57142,938.79076 72.865852,938.80585 160.70557,786.63282 Z"
+           transform="matrix(-0.11382679,0,0,-0.92000534,177.76182,1756.0685)" />
+      </g>
+      <circle
+         style="fill:#cccccc;stroke:none;stroke-width:0"
+         id="path5240"
+         cx="159.49242"
+         cy="892.36218"
+         r="11" />
+    </g>
+  </g>
+</svg>

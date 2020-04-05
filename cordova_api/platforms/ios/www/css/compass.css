@@ -1,0 +1,33 @@
+#compassShow {
+	position: relative;
+	z-index: 2;
+	background: white;
+	text-align: center;
+	color:#777;
+	box-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+#compassShow p {
+	padding: 25px 0;
+	margin: 0;
+}
+
+#compassShow .compass {
+	position: relative;
+	overflow: hidden;
+	width: 125px;
+	height: 125px;
+	background: url('../images/compass.svg') no-repeat center center;
+	background-size:100% 100%;
+	margin:0 auto;
+}
+
+#compassShow img {
+	margin-top: 5px;
+	height: 90%;
+}
+
+#compassShow p:last-child {
+	text-align: left;
+	padding-left: 20px;
+}

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Cartoonsmart</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, width=device-width, height=device-height"/>
+    <link rel="stylesheet" href="css/ratchet.css"/>
+    <link rel="stylesheet" href="css/theme.css"/>
+    <link rel="stylesheet" href="css/compass.css"/>
+    <script src="cordova.js"></script>
+    <script src="js/ratchet.js"></script>
+    <script src="js/zepto.js"></script>
+</head>
+<body ontouchstart="">
+<header class="bar bar-nav">
+    <h1 class="title">Cartoonsmart</h1>
+</header>
+<div class="content">
+    <div class="card">
+        <ul class="table-view">
+            <li class="table-view-cell"><a class="push-right" href="#Console">Console</a></li>
+            <li class="table-view-cell"><a class="push-right" href="#Device">Device</a></li>
+            <li class="table-view-cell"><a class="push-right" href="#Events">Events</a></li>
+            <li class="table-view-cell"><a class="push-right" href="#Vibration">Vibration</a></li>
+            <li class="table-view-cell"><a class="push-right" href="#Battery">Battery Status</a></li>
+            <li class="table-view-cell"><a class="push-right" href="#Browser">In App Browser</a></li>
+            <li class="table-view-cell"><a class="push-right" href="#Statusbar">Status bar</a></li>
+            <li class="table-view-cell"><a class="push-right" href="#Network">Network</a></li>
+            <li class="table-view-cell"><a class="push-right" href="#Dialogs">Dialogs</a></li>
+            <li class="table-view-cell"><a class="push-right" href="#Accelerometer">Accelerometer</a></li>
+
+            <li class="table-view-cell">
+                <a class="push-right" href="#Compass">Compass</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+
+<div id="Console" class="modal">
+    <script src="js/console.js"></script>
+    <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#Console"></a>
+        <h1 class="title">Console</h1>
+    </header>
+    <div class="content">
+        <ul class="table-view">
+            <li class="table-view-cell"> <a id="Console1" href="#"> Log simple </a> </li>
+            <li class="table-view-cell"> <a id="Console2" href="#"> Log two arguments </a> </li>
+            <li class="table-view-divider"> Android Quirk: The Android console only accept's the first argument (device not emulator) and ignores all other values. </li>
+            <li class="table-view-cell"> <a id="Console3" href="#"> Log object </a> </li>
+            <li class="table-view-cell"> <a id="Console4" href="#"> Log array </a> </li>
+            <li class="table-view-cell"> <a id="Console5" href="#"> Log var value </a> </li>
+        </ul>
+    </div>
+</div>
+
+
+<div id="Device" class="modal">
+    <script src="js/device.js"></script>
+    <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#Device"></a>
+        <h1 class="title">Device</h1>
+    </header>
+    <div class="content">
+        <ul class="table-view">
+            <li class="table-view-cell"> <a id="DeviceLog" href="#"> Log out device object </a> </li>
+            <li class="table-view-divider">
+                Cordova  : <span id="Dev1">device.cordova</span><br/>
+                Model  : <span id="Dev2">device.model</span><br/>
+                Platform  : <span id="Dev3">device.platform</span><br/>
+                Universally Unique Identifier  : <span id="Dev4">device.uuid</span><br/>
+                Version  : <span id="Dev5">device.version</span><br/>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div id="Events" class="modal">
+    <script src="js/events.js"></script>
+    <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#Events"></a>
+        <h1 class="title">Events</h1>
+    </header>
+    <div class="content">
+        <ul class="table-view">
+            <li class="table-view-cell"> Paused <span id="paused">0</span> </li>
+            <li class="table-view-cell"> resumed <span id="resumed">0</span> </li>
+            <li class="table-view-divider">Android (some versions) and others...</li>
+            <li class="table-view-cell"> Back Button <span id="backEvent">0</span> </li>
+            <li class="table-view-cell"> Volume Up <span id="volumeUp">0</span> </li>
+            <li class="table-view-cell"> Volume Down <span id="volumeDown">0</span> </li>
+            <li class="table-view-divider">Android deprecated...</li>
+            <li class="table-view-cell"> Search Button <span id="searchEvent">0</span> </li>
+            <li class="table-view-cell"> Menu Button <span id="menuEvent">0</span> </li>
+        </ul>
+    </div>
+</div>
+
+
+<div id="Vibration" class="modal">
+    <script src="js/vibration.js"></script>
+    <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#Vibration"></a>
+        <h1 class="title">Vibration</h1>
+    </header>
+    <div class="content">
+        <div class="card">
+            <ul class="table-view">
+                <li class="table-view-cell"> <a id="VibrateNormal" href="#"> Vibrate </a> </li>
+                <li class="table-view-cell"> <a id="VibratePattern" href="#"> Vibrate Pattern </a> </li>
+                <li class="table-view-cell"> <a id="VibrateCancel" href="#"> Vibrate Cancel </a> </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div id="Battery" class="modal">
+    <script src="js/battery.js"></script>
+    <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#Battery"></a>
+        <h1 class="title">Battery Status</h1>
+    </header>
+    <div class="content">
+        <div class="card">
+            <ul class="table-view">
+                <li class="table-view-divider">
+                    Event Fired : <span id="BatteryEvent">...</span><br/>
+                    Battery level : <span id="BatteryLevel">...</span><br/>
+                    Device plugged in : <span id="BatteryPlugged">...</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div id="Browser" class="modal">
+    <script src="js/browser.js"></script>
+    <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#Browser"></a>
+        <h1 class="title">In App Browser</h1>
+    </header>
+    <div class="content">
+        <div class="card">
+            <ul class="table-view">
+                <li class="table-view-cell"> <a id="openNormal" href="http://www.cartoonsmart.com" target="_system"> Open Normal </a> </li>
+                <li class="table-view-cell"> <a id="openWin" href="http://www.cartoonsmart.com" target="_blank"> Open Link </a> </li>
+                <li class="table-view-cell"> <a id="openWithOptions" href="#"> Window with Option's </a> </li>
+                <li class="table-view-cell"> <a id="openWithEvents" href="#"> Open Window with Events </a> </li>
+                <li class="table-view-cell"> <a id="openCloseWin" href="#"> Open &amp; Close </a> </li>
+                <li class="table-view-cell"> <a id="passCSS" href="#"> Passing CSS </a> </li>
+                <li class="table-view-cell"> <a id="passJS" href="#"> Passing JS </a> </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div id="Statusbar" class="modal">
+    <script src="js/statusbar.js"></script>
+    <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#Statusbar"></a>
+        <h1 class="title">Statusbar</h1>
+    </header>
+    <div class="content">
+        <div class="card">
+            <ul class="table-view">
+                <li class="table-view-divider">Ios Only</li>
+                <li class="table-view-cell"><a id="OverlayFalse" href="#"> Overlay False </a></li>
+                <li class="table-view-cell"><a id="OverlayTrue" href="#"> Overlay True </a></li>
+                <li class="table-view-divider">Android, iOS and Windows Phone</li>
+                <li class="table-view-cell"><a id="StatusHide" href="#"> Hide </a></li>
+                <li class="table-view-cell"><a id="StatusShow" href="#"> Show </a></li>
+                <li class="table-view-cell"><a id="StatusToggle" href="#"> Toggle </a></li>
+                <li class="table-view-divider">Android 5+, iOS and Windows Phone</li>
+                <li class="table-view-cell"><a id="StatusColor" href="#"> Status Color </a></li>
+                <li class="table-view-cell"><a id="StatusColorHEX" href="#"> Status Color HEX </a></li>
+                <li class="table-view-divider">iOS and Windows Phone</li>
+                <li class="table-view-cell"><a id="StatusDefault" href="#"> Status Default </a></li>
+                <li class="table-view-cell"><a id="StatusLightContent" href="#"> Status Light Content </a></li>
+                <li class="table-view-cell"><a id="StatusBlackTranslucent" href="#"> Status Black Translucent </a></li>
+                <li class="table-view-cell"><a id="StatusBlackOpaque" href="#"> Status Black Opaque </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div id="Network" class="modal">
+    <script src="js/network.js"></script>
+    <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#Network"></a>
+        <h1 class="title">Network</h1>
+    </header>
+    <div class="content">
+        <div class="card">
+            <ul class="table-view">
+                <li class="table-view-divider">Network type...</li>
+                <li class="table-view-cell"><a href="#" id="NetworkGet" class="push-right">Get Network Information</a></li>
+                <li class="table-view-cell" id="NetworkDisplay">...</li>
+                <li class="table-view-divider">Network Event</li>
+                <li class="table-view-cell" id="NetworkEvent">...</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div id="Dialogs" class="modal">
+    <script src="js/dialog.js"></script>
+    <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#Dialogs"></a>
+        <h1 class="title">Dialogs</h1>
+    </header>
+    <div class="content">
+        <div class="card">
+            <ul class="table-view">
+                <li class="table-view-divider">Returned information...</li>
+                <li class="table-view-cell" id="DialogReturn">...</li>
+                <li class="table-view-divider">Open Dialogs</li>
+                <li class="table-view-cell"><a href="#" id="OpenDialog">Open Dialog</a></li>
+                <li class="table-view-cell"><a href="#" id="OpenConfirmDialog">Open Confirm Dialog</a></li>
+                <li class="table-view-cell"><a href="#" id="OpenPromptDialog">Open Prompt Dialog</a></li>
+                <li class="table-view-cell"><a href="#" id="OpenBeepDialog">Open Beep Dialog</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div id="Accelerometer" class="modal">
+    <script src="js/accelerometer.js"></script>
+    <header class="bar bar-nav">
+        <a id="closeAccelerometer" class="icon icon-close pull-right" href="#Accelerometer"></a>
+        <h1 class="title">Accelerometer</h1>
+    </header>
+    <div class="content">
+        <div class="card">
+            <ul class="table-view">
+                <li class="table-view-divider">Get or Watch Accelerometer</li>
+                <li class="table-view-cell"><a href="#" id="GetValues">Get Values</a></li>
+                <li class="table-view-cell"><a href="#" id="WatchValues">Watch Values</a></li>
+                <li class="table-view-cell"><a href="#" id="StopWatching">Stop Watching</a></li>
+                <li class="table-view-divider">X, Y &amp; Z Values</li>
+                <li class="table-view-cell">X : <span id="X"></span></li>
+                <li class="table-view-cell">Y : <span id="Y"></span></li>
+                <li class="table-view-cell">Z : <span id="Z"></span></li>
+                <li class="table-view-cell">Timestamp : <span id="stamp"></span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div id="Compass" class="modal">
+    <script src="js/compass.js"></script>
+    <header class="bar bar-nav">
+        <a id="compassClose" class="icon icon-close pull-right" href="#Compass"></a>
+        <h1 class="title">Compass</h1>
+    </header>
+    <div class="content">
+        <div id="compassShow">
+            <p>True Heading...</p>
+            <div class="compass">
+                <img id="NeedleTrue" src="images/compass_needle.svg" alt="Compass Needle"/>
+            </div>
+            <p>Magnetic Heading...</p>
+            <div class="compass">
+                <img id="NeedleMagnetic" src="images/compass_needle.svg" alt="Compass Needle"/>
+            </div>
+            <p>
+                Accuracy: <span id="compassAccuracy">...</span> <br/>
+                Time: <span id="compassStamp">...</span>
+            </p>
+        </div>
+        <ul class="table-view">
+            <li class="table-view-cell"><a href="#" id="GetHeading">Get Heading</a></li>
+            <li class="table-view-cell"><a href="#" id="WatchHeading">Watch Heading</a></li>
+            <li class="table-view-cell"><a href="#" id="StopHeading">Stop Watching Heading</a></li>
+        </ul>
+    </div>
+</div>
+
+
+</body>
+</html>
