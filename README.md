@@ -441,7 +441,7 @@ object 하나를 200번 만드는 것보다 shared object인 `prototype`을 사�
 
 # Plugin & Library & Cordova API 
  
-# https://cordova.apache.org/docs/en/latest/ 
+## https://cordova.apache.org/docs/en/latest/ 
 ## 필요한 플러그인 모두 위에서 찾아서 쓰면 됨
 
 ### Zepto - library
@@ -451,7 +451,7 @@ https://github.com/madrobby/zepto
 - Minimal Version jQuery
 
 
-# ❗️ Compatiability Issue
+# ❗️ Compatability Issue
 
 - 가상기기에서 되는게 있고 안되는게 있다.
 - 실제 기기에서 되는게 있고 안되는게 있다.
